@@ -1,15 +1,15 @@
 {
-  "name": "hackathon-starter",
-  "version": "7.0.0",
-  "description": "A boilerplate for Node.js web applications",
+  "name": "five-line-rhyme",
+  "version": "1.0.0",
+  "description": "A collection of poems that are only 5 lines long",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sahat/hackathon-starter.git"
+    "url": "https://github.com/20jasper/five-line-rhyme"
   },
   "license": "MIT",
-  "author": "Sahat Yalkabov",
+  "author": "Jacob Asper",
   "contributors": [
-    "Yashar Fakhari (https://github.com/YasharF)"
+    "Jacob Asper (https://github.com/20jasper)"
   ],
   "scripts": {
     "postinstall": "npm rebuild node-sass",
@@ -74,12 +74,9 @@
   },
   "engines": {
     "node": ">=16"
+		
   },
-  "bugs": {
-    "url": "https://github.com/sahat/hackathon-starter/issues"
-  },
-  "homepage": "https://github.com/sahat/hackathon-starter#readme",
-  "main": "app.js",
+	"main": "app.js",
   "directories": {
     "test": "test"
   },

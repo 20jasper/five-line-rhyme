@@ -7,7 +7,7 @@ Five Line Rhyme is full stack web app full of poems only 5 lines long.
 
 ## How It's Made:
 
-**Front end:** HTML, CSS, JavaScript
+**Front end:** HTML, CSS, Bootstrap, JavaScript
 
 **Back end:** Node, Express, Pug, MongoDB, Mongoose
 

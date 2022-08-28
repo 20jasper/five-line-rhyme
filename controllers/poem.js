@@ -6,7 +6,7 @@ const Poem = require('../models/Poem');
  */
 
 exports.getPoems = (req, res) => {
-	res.render('error/500')
+	res.render('error/404')
 }
 
 //add story post request

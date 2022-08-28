@@ -17,6 +17,13 @@ const userSchema = new mongoose.Schema({
 	tokens: Array,
 
 	profile: {
+		userName: {
+			type: String,
+			required: true,
+			//trims white space
+			trim: true,
+			unique: true,
+		},
 		name: String,
 		gender: String,
 		location: String,

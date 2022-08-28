@@ -1,7 +1,7 @@
 {
   "name": "five-line-rhyme",
   "version": "1.0.0",
-  "description": "A collection of poems that are only 5 lines long",
+  "description": "A collection of poems only 5 lines long",
   "repository": {
     "type": "git",
     "url": "https://github.com/20jasper/five-line-rhyme"

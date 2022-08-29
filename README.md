@@ -17,7 +17,7 @@ Users can look at poems shared by others or create an account to post their own.
 
 None yet -->
 
-<!-- ## Lessons Learned:
+## Lessons Learned:
 
-None yet -->
+I learned how to extend Pug layouts and use conditionals to set attributes. 
 

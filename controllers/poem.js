@@ -9,6 +9,10 @@ exports.getPoems = (req, res) => {
 	res.render('error/404')
 }
 
+exports.getAddPage = (req, res) => {
+	res.render("poems/add")
+}
+
 //add story post request
 exports.postPoem = async (req, res) => {
 	try {

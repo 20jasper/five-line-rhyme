@@ -1,5 +1,5 @@
 # Five Line Rhyme
-Five Line Rhyme is full stack web app full of poems only 5 lines long.
+Five Line Rhyme is a full stack web app full of poems only 5 lines long.
 
 **Link to project:** Nothing yet :)
 

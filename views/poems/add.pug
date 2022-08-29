@@ -10,17 +10,17 @@ block content
 			p Please sign in before posting a poem
 		else
 			.form-group.row
-				label(class='col-md-2 col-form-label font-weight-bold', for='name') Name
+				label(class='col-md-2 col-form-label font-weight-bold', for='user') User name
 				.col-md-8
-					input.form-control(type='name', name='name', id='name', required)
+					input.form-control(type='user', name='user', id='user', required)
 			.form-group.row
 				label(class='col-md-2 col-form-label font-weight-bold', for='title') Title
 				.col-md-8
 					input.form-control(type='title', name='title', id='title', required)
 			.form-group.row
-				label(class='col-md-2 col-form-label font-weight-bold', for='message') Put your poem here
+				label(class='col-md-2 col-form-label font-weight-bold', for='body') Put your poem here
 				.col-md-8
-					textarea.form-control(name='message', id='message', rows='7', autofocus=(!unknownUser).toString(), required)
+					textarea.form-control(name='body', id='body', rows='7', autofocus=(!unknownUser).toString(), required)
 			.form-group
 				.offset-md-2.col-md-8.p-1
 					br

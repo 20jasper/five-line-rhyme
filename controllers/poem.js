@@ -1,22 +1,22 @@
 const Poem = require('../models/Poem');
 
 /**
- * GET /poems
+ * GET /poems/add
  * 
  */
-
-exports.getPoems = (req, res) => {
-	res.render('error/404')
-}
 
 exports.getAddPage = (req, res) => {
 	res.render("poems/add")
 }
 
+/**
+ * Post /poems
+ * 
+ */
+
 //add story post request
 exports.postPoem = async (req, res) => {
 	try {
-		req.body.user = req.user.userName
 		await Poem.create(req.body)
 		res.redirect('/')
 	} catch (err) {

@@ -5,6 +5,9 @@ Five Line Rhyme is full stack web app full of poems only 5 lines long.
 
 <!-- ![alt tag](http://placecorgi.com/1200/650) -->
 
+- [Five Line Rhyme](#five-line-rhyme)
+	- [How It's Made:](#how-its-made)
+	- [Lessons Learned:](#lessons-learned)
 ## How It's Made:
 
 **Front end:** HTML, CSS, Bootstrap, JavaScript

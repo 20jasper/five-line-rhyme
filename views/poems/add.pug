@@ -10,9 +10,13 @@ block content
 			p Please sign in before posting a poem
 		else
 			.form-group.row
+				label(class='col-md-2 col-form-label font-weight-bold', for='name') Name
+				.col-md-8
+					input.form-control(type='name', name='name', id='name', required)
+			.form-group.row
 				label(class='col-md-2 col-form-label font-weight-bold', for='title') Title
 				.col-md-8
-					input.form-control(type='title', name='title', id='title', autocomplete='title', required)
+					input.form-control(type='title', name='title', id='title', required)
 			.form-group.row
 				label(class='col-md-2 col-form-label font-weight-bold', for='message') Put your poem here
 				.col-md-8

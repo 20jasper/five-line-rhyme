@@ -141,8 +141,6 @@ app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userControl
 /**
  * Poetry routes
  */
-//for now should display 404 error
-app.get("/poems", poemController.getPoems)
 app.get("/poems/add", poemController.getAddPage)
 app.post("/poems", passportConfig.isAuthenticated, poemController.postPoem)
 

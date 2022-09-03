@@ -23,7 +23,6 @@ const userSchema = new mongoose.Schema({
 	twitter: String,
 	google: String,
 	github: String,
-	instagram: String,
 	tokens: Array,
 
 	profile: {

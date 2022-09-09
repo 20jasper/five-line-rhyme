@@ -7,7 +7,7 @@ const PoemSchema = new mongoose.Schema({
 		//trims white space
 		trim: true,
 	},
-	body: {
+	content: {
 		type: String,
 		required: true,
 	},

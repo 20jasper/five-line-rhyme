@@ -8,6 +8,7 @@ exports.index = async (req, res) => {
 	try {
 		//get all public stories
 		const poems = await Poem.find()
+			.populate('user')
 			.sort({ createdAt: 'desc' })
 			.lean()
 		console.log(poems)

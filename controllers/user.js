@@ -137,8 +137,19 @@ exports.postSignup = (req, res, next) => {
 	const user = new User({
 		email: req.body.email,
 		password: req.body.password,
+		userName: req.body.userName,
 	});
 
+	//ensure unique user name
+	User.findOne({ userName: req.body.userName }, (err, existingUser) => {
+		if (err) { return next(err); }
+		if (existingUser) {
+			req.flash('errors', { msg: 'Account with that user name already exists.' });
+			return res.redirect('/signup');
+		}
+	});
+
+	//ensure unique email
 	User.findOne({ email: req.body.email }, (err, existingUser) => {
 		if (err) { return next(err); }
 		if (existingUser) {

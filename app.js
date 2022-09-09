@@ -141,7 +141,7 @@ app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userControl
 /**
  * Poetry routes
  */
-app.get("/poems/add", poemController.getAddPage)
+app.get("/poems/add", passportConfig.isAuthenticated, poemController.getAddPage)
 app.post("/poems", passportConfig.isAuthenticated, poemController.postPoem)
 
 

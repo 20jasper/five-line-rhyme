@@ -17,6 +17,7 @@ exports.getAddPage = (req, res) => {
 //add story post request
 exports.postPoem = async (req, res) => {
 	try {
+		req.body.user = req.user.id
 		await Poem.create(req.body)
 		res.redirect('/')
 	} catch (err) {

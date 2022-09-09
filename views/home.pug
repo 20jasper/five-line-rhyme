@@ -8,6 +8,6 @@ block content
 		each poem in poems
 			.col-md-6
 				h2= poem.title
-				p= poem.body
-				h4 User #{poem.user}
+				p= poem.content
+				h4 User #{user.email}
 				a.btn.btn-primary(href='#', role='button') View details 

@@ -12,7 +12,8 @@ const PoemSchema = new mongoose.Schema({
 		required: true,
 	},
 	user: {
-		type: String,
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'User',
 		required: true,
 	},
 	createdAt: {

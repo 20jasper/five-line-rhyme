@@ -199,6 +199,7 @@ exports.postUpdateProfile = (req, res, next) => {
 		user.userName = req.body.userName || '';
 		user.profile.location = req.body.location || '';
 		user.profile.website = req.body.website || '';
+		user.profile.pronouns = req.body.pronouns || '';
 		user.save((err) => {
 			if (err) {
 				if (err.code === 11000) {

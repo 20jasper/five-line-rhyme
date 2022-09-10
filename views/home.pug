@@ -10,7 +10,10 @@ block content
 				h2= poem.title
 				p= poem.content
 				if poem.user
-					h4 User: #{poem.user.userName}
+					if poem.user.profile.pronouns
+						h4 User: #{poem.user.userName} (#{poem.user.profile.pronouns})
+					else
+						h4 User: #{poem.user.userName}
 				else 
 					h4 User: deleted user
 				a.btn.btn-primary(href='#', role='button') View details 

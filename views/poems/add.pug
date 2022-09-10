@@ -13,8 +13,16 @@ block content
 		.form-group.row
 			label(class='col-md-2 col-form-label font-weight-bold', for='body') Put your poem here
 			.col-md-8
-				textarea.form-control(name='content', id='content', rows='7', autofocus="true", required)
+				textarea.form-control(name='content', id='content', class='quill', rows='7', autofocus="true", required)
 		.form-group
 			.offset-md-2.col-md-8.p-1
 				br
 				button.btn.btn-primary(type='submit') Post Poem
+
+	//quill
+	script(src='//cdn.quilljs.com/1.0.0/quill.js')
+	script(src='//cdn.quilljs.com/1.0.0/quill.min.js')
+	script.
+		var editor = new Quill('.quill', {
+		theme: 'snow',
+		});

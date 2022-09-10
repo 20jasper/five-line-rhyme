@@ -197,7 +197,7 @@ exports.postUpdateProfile = (req, res, next) => {
 		if (err) { return next(err); }
 		if (existingUser) {
 			req.flash('errors', { msg: 'Account with that user name already exists.' });
-			return res.redirect('/signup');
+			return res.redirect('/account');
 		}
 	});
 

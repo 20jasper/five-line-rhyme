@@ -26,8 +26,7 @@ const userSchema = new mongoose.Schema({
 	tokens: Array,
 
 	profile: {
-		name: String,
-		gender: String,
+		pronouns: String,
 		location: String,
 		website: String,
 		picture: String

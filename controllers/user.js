@@ -192,11 +192,21 @@ exports.postUpdateProfile = (req, res, next) => {
 	}
 	req.body.email = validator.normalizeEmail(req.body.email, { gmail_remove_dots: false });
 
+	//ensure unique user name
+	User.findOne({ userName: req.body.userName }, (err, existingUser) => {
+		if (err) { return next(err); }
+		if (existingUser) {
+			req.flash('errors', { msg: 'Account with that user name already exists.' });
+			return res.redirect('/signup');
+		}
+	});
+
+	//ensure unique email and update
 	User.findById(req.user.id, (err, user) => {
 		if (err) { return next(err); }
 		if (user.email !== req.body.email) user.emailVerified = false;
 		user.email = req.body.email || '';
-		user.profile.name = req.body.name || '';
+		user.userName = req.body.userName || '';
 		user.profile.gender = req.body.gender || '';
 		user.profile.location = req.body.location || '';
 		user.profile.website = req.body.website || '';

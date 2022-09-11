@@ -26,7 +26,7 @@ None yet -->
 
 ## Lessons Learned:
 
-I learned how to extend Pug layouts and use conditionals to set attributes. This project also taught me a lot about validating unique emails and user names. I learned how to update an existing user's profile. I learned how to populate posts with user information
+I learned how to extend Pug layouts and use conditionals to set attributes. This project also taught me a lot about validating unique emails and user names. I learned how to update an existing user's profile. I learned how to populate posts with user information. I learned how to set defaults for keys in schemas
 
 ## Installation
 You can install the necessary dependencies with

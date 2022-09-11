@@ -138,6 +138,12 @@ exports.postSignup = (req, res, next) => {
 		email: req.body.email,
 		password: req.body.password,
 		userName: req.body.userName,
+		profile: {
+			pronouns: "",
+			location: "",
+			website: "",
+			picture: ""
+		}
 	});
 
 	//ensure unique user name

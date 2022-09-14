@@ -7,6 +7,7 @@ const _ = require('lodash');
 const validator = require('validator');
 const mailChecker = require('mailchecker');
 const User = require('../models/User');
+const cloudinary = require("../middleware/cloudinary")
 
 const randomBytesAsync = promisify(crypto.randomBytes);
 
@@ -142,7 +143,10 @@ exports.postSignup = (req, res, next) => {
 			pronouns: "",
 			location: "",
 			website: "",
-			picture: ""
+			picture: {
+				url: "",
+				cloudinaryId: "",
+			}
 		}
 	});
 
@@ -243,6 +247,34 @@ exports.postUpdatePassword = (req, res, next) => {
 			res.redirect('/account');
 		});
 	});
+};
+
+/**
+ * POST /account/postUpdateProfilePicture
+ * Update current profilePicture.
+ */
+exports.postUpdateProfilePicture = async (req, res, next) => {
+	try {
+		// Upload image to cloudinary
+		const result = await cloudinary.uploader.upload(req.file.path);
+		console.log(result.secure_url, result.public_id)
+
+		User.findById(req.user.id, (err, user) => {
+			if (err) { return next(err); }
+			const picture = user.profile.picture
+			picture.url = result.secure_url;
+			picture.cloudinaryId = result.public_id;
+			user.save((err) => {
+				if (err) { return next(err); }
+				req.flash('success', { msg: 'Profile Picture Updated' });
+				res.redirect('/account');
+			});
+		});
+	} catch (err) {
+		console.log(err);
+		req.flash('errors', { msg: 'Profile Picture Update Failed' });
+		res.redirect('/account');
+	}
 };
 
 /**

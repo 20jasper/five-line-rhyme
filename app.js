@@ -15,25 +15,9 @@ const path = require('path');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const sass = require('node-sass-middleware');
-const multer = require('multer');
+const upload = require('./middleware/multer');
+const passportConfig = require('./config/passport');
 
-const upload = multer({
-	storage: multer.diskStorage({}),
-	fileFilter: (req, file, cb) => {
-		let ext = path.extname(file.originalname);
-		if (ext !== ".jpg" && ext !== ".jpeg" && ext !== ".png") {
-			//cb is callback for multer, 2nd param means don't include file
-			cb(new Error("File type is not supported"), false);
-			return;
-		}
-		//cb is callback for multer, 2nd param means do include file
-		cb(null, true);
-	},
-});
-
-/**
- * Load environment variables from .env file, where API keys and passwords are configured.
- */
 dotenv.config({ path: 'config/.env' });
 
 /**
@@ -45,11 +29,6 @@ const apiController = require('./controllers/api');
 const contactController = require('./controllers/contact');
 const poemController = require("./controllers/poem")
 
-
-/**
- * API keys and Passport configuration.
- */
-const passportConfig = require('./config/passport');
 
 /**
  * Create Express server.

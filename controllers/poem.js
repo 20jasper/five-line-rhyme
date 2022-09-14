@@ -18,6 +18,14 @@ exports.getAddPage = (req, res) => {
 exports.postPoem = async (req, res) => {
 	try {
 		req.body.user = req.user.id
+		//sanatize poems
+		const entityHashMap = {
+			"&": "&amp;",
+			"<": "&lt;",
+			">": "&gt;",
+		}
+		req.body.content = req.body.content.replace(/&|<|>/g, (str) => entityHashMap[str])
+
 		await Poem.create(req.body)
 		res.redirect('/')
 	} catch (err) {

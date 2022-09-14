@@ -17,7 +17,20 @@ const passport = require('passport');
 const sass = require('node-sass-middleware');
 const multer = require('multer');
 
-const upload = multer({ dest: path.join(__dirname, 'uploads') });
+const upload = multer({
+	storage: multer.diskStorage({}),
+	fileFilter: (req, file, cb) => {
+		let ext = path.extname(file.originalname);
+		console.log("multer", file)
+		if (ext !== ".jpg" && ext !== ".jpeg" && ext !== ".png") {
+			//cb is callback for multer, 2nd param means don't include file
+			cb(new Error("File type is not supported"), false);
+			return;
+		}
+		//cb is callback for multer, 2nd param means do include file
+		cb(null, true);
+	},
+});
 
 /**
  * Load environment variables from .env file, where API keys and passwords are configured.
@@ -80,7 +93,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 app.use((req, res, next) => {
-	if (req.path === '/api/upload') {
+	if (req.path === '/api/upload' ||
+		req.path === "/account/postUpdateProfilePicture") {
 		// Multer multipart/form-data handling needs to occur before the Lusca CSRF check.
 		next();
 	} else {
@@ -134,6 +148,7 @@ app.get('/account/verify', passportConfig.isAuthenticated, userController.getVer
 app.get('/account/verify/:token', passportConfig.isAuthenticated, userController.getVerifyEmailToken);
 app.get('/account', passportConfig.isAuthenticated, userController.getAccount);
 app.post('/account/profile', passportConfig.isAuthenticated, userController.postUpdateProfile);
+app.post('/account/postUpdateProfilePicture', upload.single("profilePicture"), userController.postUpdateProfilePicture);
 app.post('/account/password', passportConfig.isAuthenticated, userController.postUpdatePassword);
 app.post('/account/delete', passportConfig.isAuthenticated, userController.postDeleteAccount);
 app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userController.getOauthUnlink);
@@ -152,8 +167,8 @@ app.post("/poems", passportConfig.isAuthenticated, poemController.postPoem)
 // app.get('/api/github', passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.getGithub);
 // app.get('/api/twitter', passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.getTwitter);
 // app.post('/api/twitter', passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.postTwitter);
-// app.get('/api/upload', lusca({ csrf: true }), apiController.getFileUpload);
-// app.post('/api/upload', upload.single('myFile'), lusca({ csrf: true }), apiController.postFileUpload);
+app.get('/api/upload', lusca({ csrf: true }), apiController.getFileUpload);
+app.post('/api/upload', upload.single('myFile'), lusca({ csrf: true }), apiController.postFileUpload);
 
 
 /**
@@ -182,7 +197,7 @@ if (process.env.NODE_ENV === 'development') {
 	// only use in development
 	app.use(errorHandler());
 } else {
-	app.use((err, req, res) => {
+	app.use((err, req, res, next) => {
 		console.error(err);
 		res.status(500).send('Server Error');
 	});

@@ -34,14 +34,26 @@ block content
 			label.col-md-3.col-form-label.font-weight-bold.text-right(for='website') Website
 			.col-md-7
 				input.form-control(type='text', name='website', id='website', value=user.profile.website, autocomplete='url')
-		.form-group.row
-			label.col-md-3.col-form-label.font-weight-bold.text-right Gravatar
-			.col-sm-4
-				img(src=user.gravatar(), class='profile', width='100', height='100')
 		.form-group
 			.offset-sm-3.col-md-7.pl-2
 				button.btn.btn.btn-primary(type='submit')
 					| Update Profile
+
+	form(action='/account/postUpdateProfilePicture',enctype="multipart/form-data", method='POST')
+		input(type='hidden', name='_csrf', value=_csrf)
+		.form-group.row
+			label.col-md-3.col-form-label.font-weight-bold.text-right Profile Picture
+			.col-sm-4
+				if user.profile.picture
+					img(src=user.profile.picture, class='profile', width='100', height='100')
+				else
+					img(src=user.gravatar(), class='profile', width='100', height='100')
+				.col-md-7
+				input.form-control(type='file', name='profilePicture', id='profilePicture')
+		.form-group
+			.offset-sm-3.col-md-7.pl-2
+				button.btn.btn.btn-primary(type='submit')
+					| Update Profile Picture
 
 	.pb-2.mt-2.mb-4.border-bottom
 		h3 Change Password

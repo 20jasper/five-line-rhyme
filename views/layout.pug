@@ -11,9 +11,6 @@ html.h-100(lang='en')
 		link(rel='stylesheet', href='/css/main.css')
 		link(rel='stylesheet', href='https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css')
 
-		//CKEDITOR 
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/ckeditor/4.19.1/ckeditor.js" integrity="sha512-Ooi9IbjM2SIDjQ02ENbPFuuORT8F8Rc+rowcYfLneDwKRxw1+gVVj5tciVmV/APnA/Ys+qy1MbNKK3k2EaAHcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
 		block head
 
 	body.d-flex.flex-column.h-100
@@ -47,15 +44,3 @@ html.h-100(lang='en')
 					"href": "/privacy-policy.html"
 				}
 			});
-
-		script.
-			//replace textarea with name of content with CKEDITOR
-			CKEDITOR.replace("content", {
-				plugins : [
-					'enterkey',
-					'entities',
-					'floatingspace',
-					//- 'wordcount',
-					'wysiwygarea'
-				],
-			})

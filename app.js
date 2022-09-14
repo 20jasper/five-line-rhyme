@@ -21,7 +21,6 @@ const upload = multer({
 	storage: multer.diskStorage({}),
 	fileFilter: (req, file, cb) => {
 		let ext = path.extname(file.originalname);
-		console.log("multer", file)
 		if (ext !== ".jpg" && ext !== ".jpeg" && ext !== ".png") {
 			//cb is callback for multer, 2nd param means don't include file
 			cb(new Error("File type is not supported"), false);

@@ -29,7 +29,10 @@ const userSchema = new mongoose.Schema({
 		pronouns: String,
 		location: String,
 		website: String,
-		picture: String
+		picture: {
+			url: String,
+			cloudinaryId: String,
+		}
 	}
 }, { timestamps: true });
 

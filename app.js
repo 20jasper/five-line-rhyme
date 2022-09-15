@@ -26,7 +26,6 @@ dotenv.config({ path: 'config/.env' });
 const homeController = require('./controllers/home');
 const userController = require('./controllers/user');
 const apiController = require('./controllers/api');
-const contactController = require('./controllers/contact');
 const poemController = require("./controllers/poem")
 
 
@@ -71,8 +70,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 app.use((req, res, next) => {
-	if (req.path === '/api/upload' ||
-		req.path === "/account/postUpdateProfilePicture") {
+	if (req.path === "/account/postUpdateProfilePicture") {
 		// Multer multipart/form-data handling needs to occur before the Lusca CSRF check.
 		next();
 	} else {
@@ -120,8 +118,6 @@ app.get('/reset/:token', userController.getReset);
 app.post('/reset/:token', userController.postReset);
 app.get('/signup', userController.getSignup);
 app.post('/signup', userController.postSignup);
-app.get('/contact', contactController.getContact);
-app.post('/contact', contactController.postContact);
 app.get('/account/verify', passportConfig.isAuthenticated, userController.getVerifyEmail);
 app.get('/account/verify/:token', passportConfig.isAuthenticated, userController.getVerifyEmailToken);
 app.get('/account', passportConfig.isAuthenticated, userController.getAccount);
@@ -145,8 +141,6 @@ app.post("/poems", passportConfig.isAuthenticated, poemController.postPoem)
 // app.get('/api/github', passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.getGithub);
 // app.get('/api/twitter', passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.getTwitter);
 // app.post('/api/twitter', passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.postTwitter);
-app.get('/api/upload', lusca({ csrf: true }), apiController.getFileUpload);
-app.post('/api/upload', upload.single('myFile'), lusca({ csrf: true }), apiController.postFileUpload);
 
 
 /**

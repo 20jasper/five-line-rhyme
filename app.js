@@ -25,7 +25,6 @@ dotenv.config({ path: 'config/.env' });
  */
 const homeController = require('./controllers/home');
 const userController = require('./controllers/user');
-const apiController = require('./controllers/api');
 const poemController = require("./controllers/poem")
 
 

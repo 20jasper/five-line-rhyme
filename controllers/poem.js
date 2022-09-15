@@ -22,10 +22,13 @@ exports.postPoem = async (req, res, next) => {
 		const validationErrors = [];
 		const poem = req.body.content.trim()
 
-		const poemRowCount = poem.match(/\r/g).length
+		if (poem.length > 500) validationErrors.push({ msg: 'Your Poem Is Longer than 500 characters' });
+
+		//if there are 0 new line characters, the length will be undefined
+		const newLineCount = poem.match(/\r/g)?.length ?? 0
 		//check against 4 since the first line doesn't have a new line character
-		if (poemRowCount > 4) validationErrors.push({ msg: 'Your Poem Has More Than 5 Lines' });
-		else if (poemRowCount < 4) validationErrors.push({ msg: 'Your Poem Has Less Than 5 Lines' });
+		if (newLineCount < 4) validationErrors.push({ msg: 'Your Poem Has Less Than 5 Lines' });
+		else if (newLineCount > 4) validationErrors.push({ msg: 'Your Poem Has More Than 5 Lines' });
 		if (validationErrors.length) {
 			req.flash('errors', validationErrors);
 			return res.redirect('/poems/add');

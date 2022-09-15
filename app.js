@@ -124,7 +124,7 @@ app.post('/account/profile', passportConfig.isAuthenticated, userController.post
 app.post('/account/postUpdateProfilePicture', passportConfig.isAuthenticated, upload.single("profilePicture"), userController.postUpdateProfilePicture);
 app.post('/account/password', passportConfig.isAuthenticated, userController.postUpdatePassword);
 app.post('/account/delete', passportConfig.isAuthenticated, userController.postDeleteAccount);
-app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userController.getOauthUnlink);
+// app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userController.getOauthUnlink);
 
 /**
  * Poetry routes

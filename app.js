@@ -133,35 +133,6 @@ app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userControl
 app.get("/poems/add", passportConfig.isAuthenticated, poemController.getAddPage)
 app.post("/poems", passportConfig.isAuthenticated, poemController.postPoem)
 
-
-/**
- * API examples routes.
- */
-// app.get('/api', apiController.getApi);
-// app.get('/api/github', passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.getGithub);
-// app.get('/api/twitter', passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.getTwitter);
-// app.post('/api/twitter', passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.postTwitter);
-
-
-/**
- * OAuth authentication routes. (Sign in)
- */
-// app.get('/auth/github', passport.authenticate('github'));
-// app.get('/auth/github/callback', passport.authenticate('github', { failureRedirect: '/login' }), (req, res) => {
-// 	res.redirect(req.session.returnTo || '/');
-// });
-// app.get('/auth/twitter', passport.authenticate('twitter'));
-// app.get('/auth/twitter/callback', passport.authenticate('twitter', { failureRedirect: '/login' }), (req, res) => {
-// 	res.redirect(req.session.returnTo || '/');
-// });
-
-
-/**
- * OAuth authorization routes. (API examples)
- */
-
-// none for now
-
 /**
  * Error Handler.
  */

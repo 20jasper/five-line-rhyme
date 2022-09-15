@@ -15,9 +15,22 @@ exports.getAddPage = (req, res) => {
  */
 
 //add story post request
-exports.postPoem = async (req, res) => {
+exports.postPoem = async (req, res, next) => {
 	try {
 		req.body.user = req.user.id
+
+		const validationErrors = [];
+		const poem = req.body.content.trim()
+
+		const poemRowCount = poem.match(/\r/g).length
+		//check against 4 since the first line doesn't have a new line character
+		if (poemRowCount > 4) validationErrors.push({ msg: 'Your Poem Has More Than 5 Lines' });
+		else if (poemRowCount < 4) validationErrors.push({ msg: 'Your Poem Has Less Than 5 Lines' });
+		if (validationErrors.length) {
+			req.flash('errors', validationErrors);
+			return res.redirect('/poems/add');
+		}
+
 		//sanatize poems
 		const entityHashMap = {
 			"&": "&amp;",

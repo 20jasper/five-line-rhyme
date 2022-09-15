@@ -11,7 +11,6 @@ exports.index = async (req, res) => {
 			.populate('user')
 			.sort({ createdAt: 'desc' })
 			.lean()
-		console.log(poems)
 		res.render('home', {
 			title: 'Home',
 			poems,

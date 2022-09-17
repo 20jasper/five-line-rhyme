@@ -20,9 +20,6 @@ const userSchema = new mongoose.Schema({
 	emailVerificationToken: String,
 	emailVerified: Boolean,
 
-	twitter: String,
-	google: String,
-	github: String,
 	tokens: Array,
 
 	profile: {

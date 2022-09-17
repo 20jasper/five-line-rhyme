@@ -10,14 +10,14 @@ block content
 			label.col-md-3.col-form-label.font-weight-bold.text-right(for='email') Email
 			.col-md-7
 				input.form-control(type='email', name='email', id='email', value=user.email, autocomplete='email', required)
-			.offset-sm-3.col-md-7.pl-3
-				if user.emailVerified
-					.text-success.font-italic
-						| Verified
-				else
-					.text-danger.font-italic
-						| Unverified: &nbsp;
-						a(href='/account/verify') Send verification email
+			//- .offset-sm-3.col-md-7.pl-3
+			//- 	if user.emailVerified
+			//- 		.text-success.font-italic
+			//- 			| Verified
+			//- 	else
+			//- 		.text-danger.font-italic
+			//- 			| Unverified: &nbsp;
+			//- 			a(href='/account/verify') Send verification email
 		.form-group.row
 			label.col-md-3.col-form-label.font-weight-bold.text-right(for='name') User Name
 			.col-md-7
@@ -83,17 +83,3 @@ block content
 			.offset-sm-3.col-md-7.pl-2
 				button.btn.btn-danger(type='submit')
 					| Delete my account
-
-	.pb-2.mt-2.mb-4.border-bottom
-		h3 Linked Accounts
-	.form-group
-		.offset-sm-3.col-md-7.pl-2
-			if user.google
-				p.mb-1: a.text-danger(href='/account/unlink/google') Unlink your Google account
-			else
-				p.mb-1: a(href='/auth/google') Link your Google account
-		.offset-sm-3.col-md-7.pl-2
-			if user.github
-				p.mb-1: a.text-danger(href='/account/unlink/github') Unlink your GitHub account
-			else
-				p.mb-1: a(href='/auth/github') Link your GitHub account

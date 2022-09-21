@@ -20,13 +20,13 @@ Five Line Rhyme is a full stack web app full of poems only 5 lines long.
 
 Users can look at poems shared by others or create an account to post their own.
 
-<!-- ## Optimizations
+## Optimizations
 
-None yet -->
+I would like to add pagination as well as user profile pages and post pages to make sharing content created on the platform easier. A indicator for how many lines and characters there are would be very helpful to the user as well
 
 ## Lessons Learned:
 
-I learned how to extend Pug layouts and use conditionals to set attributes. This project also taught me a lot about validating unique emails and user names. I learned how to update an existing user's profile. I learned how to populate posts with user information. I learned how to set defaults for keys in schemas
+I learned how to extend Pug layouts and use conditionals to set attributes. This project also taught me a lot about validating unique emails and user names. I learned how to update an existing user's profile. I learned how to populate posts with user information. I learned how to set defaults for keys in schemas. I learned how to use multer to handle file uploads.
 
 ## Installation
 You can install the necessary dependencies with

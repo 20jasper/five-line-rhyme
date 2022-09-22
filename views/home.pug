@@ -8,7 +8,8 @@ block content
 		each poem in poems
 			.col-md-6
 				h2= poem.title
-				p= poem.content
+				//- the ! makes HTML unescaped
+				p(style='white-space: pre-line; overflow-wrap: break-word;')!= poem.content
 				if poem.user
 					if poem.user.profile.pronouns
 						h4 User: #{poem.user.userName} (#{poem.user.profile.pronouns})
@@ -16,4 +17,4 @@ block content
 						h4 User: #{poem.user.userName}
 				else 
 					h4 User: deleted user
-				a.btn.btn-primary(href='#', role='button') View details 
+				//- a.btn.btn-primary(href='#', role='button') View details 

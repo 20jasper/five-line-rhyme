@@ -15,13 +15,9 @@ const path = require('path');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const sass = require('node-sass-middleware');
-const multer = require('multer');
+const upload = require('./middleware/multer');
+const passportConfig = require('./config/passport');
 
-const upload = multer({ dest: path.join(__dirname, 'uploads') });
-
-/**
- * Load environment variables from .env file, where API keys and passwords are configured.
- */
 dotenv.config({ path: 'config/.env' });
 
 /**
@@ -29,15 +25,8 @@ dotenv.config({ path: 'config/.env' });
  */
 const homeController = require('./controllers/home');
 const userController = require('./controllers/user');
-const apiController = require('./controllers/api');
-const contactController = require('./controllers/contact');
 const poemController = require("./controllers/poem")
 
-
-/**
- * API keys and Passport configuration.
- */
-const passportConfig = require('./config/passport');
 
 /**
  * Create Express server.
@@ -80,7 +69,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 app.use((req, res, next) => {
-	if (req.path === '/api/upload') {
+	if (req.path === "/account/postUpdateProfilePicture") {
 		// Multer multipart/form-data handling needs to occur before the Lusca CSRF check.
 		next();
 	} else {
@@ -128,52 +117,20 @@ app.get('/reset/:token', userController.getReset);
 app.post('/reset/:token', userController.postReset);
 app.get('/signup', userController.getSignup);
 app.post('/signup', userController.postSignup);
-app.get('/contact', contactController.getContact);
-app.post('/contact', contactController.postContact);
 app.get('/account/verify', passportConfig.isAuthenticated, userController.getVerifyEmail);
 app.get('/account/verify/:token', passportConfig.isAuthenticated, userController.getVerifyEmailToken);
 app.get('/account', passportConfig.isAuthenticated, userController.getAccount);
 app.post('/account/profile', passportConfig.isAuthenticated, userController.postUpdateProfile);
+app.post('/account/postUpdateProfilePicture', passportConfig.isAuthenticated, upload.single("profilePicture"), userController.postUpdateProfilePicture);
 app.post('/account/password', passportConfig.isAuthenticated, userController.postUpdatePassword);
 app.post('/account/delete', passportConfig.isAuthenticated, userController.postDeleteAccount);
-app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userController.getOauthUnlink);
+// app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userController.getOauthUnlink);
 
 /**
  * Poetry routes
  */
 app.get("/poems/add", passportConfig.isAuthenticated, poemController.getAddPage)
 app.post("/poems", passportConfig.isAuthenticated, poemController.postPoem)
-
-
-/**
- * API examples routes.
- */
-// app.get('/api', apiController.getApi);
-// app.get('/api/github', passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.getGithub);
-// app.get('/api/twitter', passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.getTwitter);
-// app.post('/api/twitter', passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.postTwitter);
-// app.get('/api/upload', lusca({ csrf: true }), apiController.getFileUpload);
-// app.post('/api/upload', upload.single('myFile'), lusca({ csrf: true }), apiController.postFileUpload);
-
-
-/**
- * OAuth authentication routes. (Sign in)
- */
-// app.get('/auth/github', passport.authenticate('github'));
-// app.get('/auth/github/callback', passport.authenticate('github', { failureRedirect: '/login' }), (req, res) => {
-// 	res.redirect(req.session.returnTo || '/');
-// });
-// app.get('/auth/twitter', passport.authenticate('twitter'));
-// app.get('/auth/twitter/callback', passport.authenticate('twitter', { failureRedirect: '/login' }), (req, res) => {
-// 	res.redirect(req.session.returnTo || '/');
-// });
-
-
-/**
- * OAuth authorization routes. (API examples)
- */
-
-// none for now
 
 /**
  * Error Handler.
@@ -182,7 +139,7 @@ if (process.env.NODE_ENV === 'development') {
 	// only use in development
 	app.use(errorHandler());
 } else {
-	app.use((err, req, res) => {
+	app.use((err, req, res, next) => {
 		console.error(err);
 		res.status(500).send('Server Error');
 	});

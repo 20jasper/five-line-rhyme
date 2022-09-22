@@ -20,16 +20,16 @@ const userSchema = new mongoose.Schema({
 	emailVerificationToken: String,
 	emailVerified: Boolean,
 
-	twitter: String,
-	google: String,
-	github: String,
 	tokens: Array,
 
 	profile: {
 		pronouns: String,
 		location: String,
 		website: String,
-		picture: String
+		picture: {
+			url: String,
+			cloudinaryId: String,
+		}
 	}
 }, { timestamps: true });
 

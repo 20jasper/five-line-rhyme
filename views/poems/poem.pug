@@ -1,0 +1,10 @@
+extends ../layout
+
+block content
+	h1 Five Line Rhyme
+	p.lead A collection of poems with only 5 lines
+	hr
+	.row
+		.col-md-6
+			include ../partials/poem
+			a.btn.btn-primary(href=`/`, role='button') Back

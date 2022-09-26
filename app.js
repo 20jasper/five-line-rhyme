@@ -131,6 +131,7 @@ app.post('/account/delete', passportConfig.isAuthenticated, userController.postD
  */
 app.get("/poems/add", passportConfig.isAuthenticated, poemController.getAddPage)
 app.post("/poems", passportConfig.isAuthenticated, poemController.postPoem)
+app.get("/poems/:id", poemController.getPoem)
 
 /**
  * Error Handler.

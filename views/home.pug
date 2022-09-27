@@ -4,9 +4,9 @@ block content
 	h1 Five Line Rhyme
 	p.lead A collection of poems with only 5 lines
 	hr
-	.row.p-25.w-50
+	.row
 		each poem in poems
 			-const user = poem.user
-			.col-sm-12
+			.col-sm-12.mb-3.pb-3.border-bottom.border-secondary
 				include partials/poem	
 				a.btn.btn-primary(href=`poems/`+poem._id, role='button') View details 

@@ -49,3 +49,20 @@ exports.postPoem = async (req, res, next) => {
 		res.render('error/500')
 	}
 }
+
+/**
+ * GET /poems/add
+ * 
+ */
+
+exports.getPoem = async (req, res) => {
+	try {
+		const poem = await Poem.findById(req.params.id)
+			.populate('user');
+
+		const user = poem.user
+		res.render("poems/poem", { poem, user });
+	} catch (err) {
+		console.log(err);
+	}
+}

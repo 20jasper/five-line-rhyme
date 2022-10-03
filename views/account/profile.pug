@@ -1,4 +1,6 @@
 extends ../layout
+include ../mixins/user/profilePicture
+
 
 block content
 	.pb-2.mt-2.mb-4.border-bottom
@@ -44,7 +46,7 @@ block content
 		.form-group.row
 			label.col-md-3.col-form-label.font-weight-bold.text-right Profile Picture
 			.col-sm-4
-				include ../partials/user/profilePicture
+				+profilePicture(user)
 				.col-md-7
 				input.form-control(type='file', name='profilePicture', id='profilePicture')
 		.form-group

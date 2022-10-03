@@ -50,6 +50,41 @@ exports.postPoem = async (req, res, next) => {
 	}
 }
 
+
+/**
+ * POST /id/delete
+ * Delete poem.
+ */
+exports.postDeletePoem = (req, res, next) => {
+	// //delete profile picture on account deletion
+	try {
+		const validationErrors = []
+
+		//check if user is the same as who wrote the poem
+		Poem.findById(req.params.id, (err, poem) => {
+			if (err) { return next(err); }
+			console.log(poem.user.id, req.user.id)
+			if (poem.user.id !== req.user.id) validationErrors.push({ msg: 'User IDs do not match' });
+		});
+
+		if (validationErrors.length) {
+			req.flash('errors', validationErrors);
+			return res.redirect(`poems/${req.params.id}`);
+		}
+
+		Poem.deleteOne({ _id: req.params.id }, (err) => {
+			if (err) { return next(err); }
+			req.flash('info', { msg: 'Your poem has been deleted.' });
+			res.redirect('/');
+		});
+	}
+	catch (err) {
+		console.log(err);
+		req.flash('errors', { msg: 'Poem Deletion Failed' });
+		return res.redirect(`poems/${req.params.id}`)
+	}
+};
+
 /**
  * GET /poems/add
  * 
@@ -60,8 +95,9 @@ exports.getPoem = async (req, res) => {
 		const poem = await Poem.findById(req.params.id)
 			.populate('user');
 
-		const user = poem.user
-		res.render("poems/poem", { poem, user });
+		res.render("poems/poem", {
+			poem,
+		});
 	} catch (err) {
 		console.log(err);
 	}

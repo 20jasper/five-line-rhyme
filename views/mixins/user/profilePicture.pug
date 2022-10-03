@@ -1,0 +1,6 @@
+mixin profilePicture(user)
+	-let profilePictureUrl = "assets/defaultProfilePicture.jpg"
+	//- if the user exists and has a profile picture
+	if user && user.profile.picture.url
+		-profilePictureUrl = user.profile.picture.url
+	img(src=profilePictureUrl, class='profile', width='100', height='100')

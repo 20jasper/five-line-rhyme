@@ -261,8 +261,13 @@ exports.postUpdateProfilePicture = async (req, res, next) => {
 		User.findById(req.user.id, (err, user) => {
 			if (err) { return next(err); }
 			const picture = user.profile.picture
+
+			//if there is already a profile picture, delete the old one
+			if (picture.cloudinaryId !== "") cloudinary.uploader.destroy(picture.cloudinaryId)
+
 			picture.url = result.secure_url;
 			picture.cloudinaryId = result.public_id;
+
 			user.save((err) => {
 				if (err) { return next(err); }
 				req.flash('success', { msg: 'Profile Picture Updated' });

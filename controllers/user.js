@@ -256,8 +256,7 @@ exports.postUpdatePassword = (req, res, next) => {
 exports.postUpdateProfilePicture = async (req, res, next) => {
 	try {
 		// Upload image to cloudinary
-		const result = await cloudinary.uploader.upload(req.file.path);
-		console.log(result.secure_url, result.public_id)
+		const result = await cloudinary.uploader.upload(req.file.path, { aspect_ratio: "1.0", height: 200, crop: "lfill" });
 
 		User.findById(req.user.id, (err, user) => {
 			if (err) { return next(err); }

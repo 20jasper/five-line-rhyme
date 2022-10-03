@@ -1,11 +1,4 @@
 h2= poem.title
 //- the ! makes HTML unescaped
 p(style='white-space: pre-line; overflow-wrap: break-word;')!= poem.content
-if user
-	if user.profile.pronouns
-		h4 User: #{user.userName} (#{user.profile.pronouns})
-	else
-		h4 User: #{user.userName}
-	include profilePicture
-else 
-	h4 User: deleted user
+include user/userName

@@ -38,6 +38,10 @@ Then create a file in the config folder called ".env" and add the following vari
 ```
 MONGODB_URI
 SESSION_SECRET
+CLOUD_NAME
+API_KEY
+API_SECRET
+CLOUDINARY_URL
 ``` 
 
 ## Usage

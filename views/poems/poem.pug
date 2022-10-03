@@ -13,7 +13,7 @@ block content
 					a.btn.btn-primary(href=`/`, role='button') Back
 				if user.id === poem.user.id
 					.col-sm-3
-						form(action=poem.id+"/delete", method='POST')
+						form(action=poem.id+"/delete", method='POST', onsubmit="return confirm('Are you sure you want to delete your poem?');")
 							input(type='hidden', name='_csrf', value=_csrf)
 							button.btn.btn-danger(type='submit')
 								| Delete Poem

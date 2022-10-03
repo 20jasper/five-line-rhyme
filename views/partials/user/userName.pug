@@ -1,7 +1,9 @@
 if user
+
 	if user.profile.pronouns
-		h4 User: #{user.userName} (#{user.profile.pronouns})
+		h4 #{user.userName} (#{user.profile.pronouns})
 	else
-		h4 User: #{user.userName}
+		h4 #{user.userName}
+
 else 
-	h4 User: deleted user
+	h4 deleted user

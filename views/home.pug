@@ -6,7 +6,6 @@ block content
 	hr
 	.row
 		each poem in poems
-			-const user = poem.user
 			.col-sm-12.mb-3.pb-3.border-bottom.border-secondary
 				include partials/poem	
 				a.btn.btn-primary(href=`poems/`+poem._id, role='button') View details 

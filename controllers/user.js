@@ -6,6 +6,7 @@ const passport = require('passport');
 const validator = require('validator');
 const mailChecker = require('mailchecker');
 const User = require('../models/User');
+const Poem = require('../models/Poem');
 const cloudinary = require("../middleware/cloudinary")
 
 const randomBytesAsync = promisify(crypto.randomBytes);
@@ -293,6 +294,10 @@ exports.postDeleteAccount = (req, res, next) => {
 
 			//if there is a profile picture, delete the old one
 			if (picture.cloudinaryId !== "") cloudinary.uploader.destroy(picture.cloudinaryId)
+		});
+
+		Poem.deleteMany({ user: req.user.id }, (err) => {
+			if (err) { return next(err); }
 		});
 	}
 	catch (err) {

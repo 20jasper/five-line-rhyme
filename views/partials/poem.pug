@@ -6,5 +6,6 @@ if user
 		h4 User: #{user.userName} (#{user.profile.pronouns})
 	else
 		h4 User: #{user.userName}
+	include profilePicture
 else 
 	h4 User: deleted user

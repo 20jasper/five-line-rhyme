@@ -6,15 +6,6 @@ block content
 	hr
 	.row
 		each poem in poems
-			.col-md-6
-				h2= poem.title
-				//- the ! makes HTML unescaped
-				p(style='white-space: pre-line; overflow-wrap: break-word;')!= poem.content
-				if poem.user
-					if poem.user.profile.pronouns
-						h4 User: #{poem.user.userName} (#{poem.user.profile.pronouns})
-					else
-						h4 User: #{poem.user.userName}
-				else 
-					h4 User: deleted user
-				//- a.btn.btn-primary(href='#', role='button') View details 
+			.col-sm-12.mb-3.pb-3.border-bottom.border-secondary
+				include partials/poem	
+				a.btn.btn-primary(href=`poems/`+poem._id, role='button') View details 

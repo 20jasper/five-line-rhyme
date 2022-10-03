@@ -1,0 +1,9 @@
+//- mixins
+include ../mixins/user/userName
+include ../mixins/user/profilePicture
+
+h2= poem.title
+//- the ! makes HTML unescaped
+p(style='white-space: pre-line; overflow-wrap: break-word;')!= poem.content
++profilePicture(poem.user)
++userName(poem.user)

@@ -28,7 +28,14 @@ I would like to add pagination as well as user profile pages and post pages to m
 
 ## Lessons Learned:
 
-I learned how to extend Pug layouts and use conditionals to set attributes. This project also taught me a lot about validating unique emails and user names. I learned how to update an existing user's profile. I learned how to populate posts with user information. I learned how to set defaults for keys in schemas. I learned how to use multer to handle file uploads.
+- I learned how to
+	- extend pug layouts and use mixins and partials to make my code more readable and maintainable
+	- validate unique user names and emails
+	- update existing user's profiles
+	- populate posts with user information
+	- use multer to handle file uploads
+	- use cloudinary to crop, store, and destroy images
+
 
 ## Installation
 You can install the necessary dependencies with

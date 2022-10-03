@@ -286,6 +286,22 @@ exports.postUpdateProfilePicture = async (req, res, next) => {
  * Delete user account.
  */
 exports.postDeleteAccount = (req, res, next) => {
+	//delete profile picture on account deletion
+	try {
+		User.findById(req.user.id, (err, user) => {
+			if (err) { return next(err); }
+			const picture = user.profile.picture
+
+			//if there is already a profile picture, delete the old one
+			if (picture.cloudinaryId !== "") cloudinary.uploader.destroy(picture.cloudinaryId)
+		});
+	}
+	catch (err) {
+		console.log(err);
+		req.flash('errors', { msg: 'Profile Picture Deletion Failed' });
+		res.redirect('/account');
+	}
+
 	User.deleteOne({ _id: req.user.id }, (err) => {
 		if (err) { return next(err); }
 		req.logout();

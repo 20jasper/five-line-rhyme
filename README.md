@@ -59,7 +59,6 @@ Use ```npm run start``` to run the app normally and ```npm run dev``` to run the
 "express": "^4.17.3",
 "express-flash": "^0.0.2",
 "express-session": "^1.17.2",
-"lodash": "^4.17.21",
 "lusca": "^1.7.0",
 "mailchecker": "^4.1.14",
 "moment": "^2.29.1",

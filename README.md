@@ -24,7 +24,11 @@ Users can look at poems shared by others or create an account to post their own.
 
 ## Optimizations
 
-I would like to add pagination as well as user profile pages to make sharing content created on the platform easier. A indicator for how many lines and characters there are would be very helpful to the user as well
+- I would like to add 
+	- pagination 
+	- profile pages 
+	- indicator for how many lines and characters there are while writing a poem
+	- update poem button
 
 ## Lessons Learned:
 

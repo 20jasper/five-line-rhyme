@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema({
 	userName: {
 		type: String,
 		required: true,
-		//trims white space
+		// trims white space
 		trim: true,
 		unique: true,
 	},

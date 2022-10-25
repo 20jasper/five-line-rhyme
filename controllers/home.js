@@ -6,19 +6,17 @@ const Poem = require('../models/Poem');
  */
 exports.index = async (req, res) => {
 	try {
-		//get all public stories
+		// get all public stories
 		const poems = await Poem.find()
 			.populate('user')
 			.sort({ createdAt: 'desc' })
-			.lean()
+			.lean();
 		res.render('home', {
 			title: 'Home',
 			poems,
-		})
+		});
+	} catch (err) {
+		console.error(err);
+		res.render('error/500');
 	}
-	catch (err) {
-		console.error(err)
-		res.render('error/500')
-	}
-
-}
+};

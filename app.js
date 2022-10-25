@@ -25,8 +25,7 @@ dotenv.config({ path: 'config/.env' });
  */
 const homeController = require('./controllers/home');
 const userController = require('./controllers/user');
-const poemController = require("./controllers/poem")
-
+const poemController = require('./controllers/poem');
 
 /**
  * Create Express server.
@@ -69,7 +68,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 app.use((req, res, next) => {
-	if (req.path === "/account/postUpdateProfilePicture") {
+	if (req.path === '/account/postUpdateProfilePicture') {
 		// Multer multipart/form-data handling needs to occur before the Lusca CSRF check.
 		next();
 	} else {
@@ -113,17 +112,17 @@ app.get('/signup', userController.getSignup);
 app.post('/signup', userController.postSignup);
 app.get('/account', passportConfig.isAuthenticated, userController.getAccount);
 app.post('/account/profile', passportConfig.isAuthenticated, userController.postUpdateProfile);
-app.post('/account/postUpdateProfilePicture', passportConfig.isAuthenticated, upload.single("profilePicture"), userController.postUpdateProfilePicture);
+app.post('/account/postUpdateProfilePicture', passportConfig.isAuthenticated, upload.single('profilePicture'), userController.postUpdateProfilePicture);
 app.post('/account/password', passportConfig.isAuthenticated, userController.postUpdatePassword);
 app.post('/account/delete', passportConfig.isAuthenticated, userController.postDeleteAccount);
 
 /**
  * Poetry routes
  */
-app.get("/poems/add", passportConfig.isAuthenticated, poemController.getAddPage)
-app.post("/poems", passportConfig.isAuthenticated, poemController.postPoem)
-app.get("/poems/:id", poemController.getPoem)
-app.post("/poems/:id/delete", passportConfig.isAuthenticated, poemController.postDeletePoem)
+app.get('/poems/add', passportConfig.isAuthenticated, poemController.getAddPage);
+app.post('/poems', passportConfig.isAuthenticated, poemController.postPoem);
+app.get('/poems/:id', poemController.getPoem);
+app.post('/poems/:id/delete', passportConfig.isAuthenticated, poemController.postDeletePoem);
 
 /**
  * Error Handler.

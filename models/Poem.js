@@ -1,10 +1,10 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
 const PoemSchema = new mongoose.Schema({
 	title: {
 		type: String,
 		required: true,
-		//trims white space
+		// trims white space
 		trim: true,
 	},
 	content: {
@@ -20,6 +20,6 @@ const PoemSchema = new mongoose.Schema({
 		type: Date,
 		default: Date.now,
 	},
-})
+});
 
-module.exports = mongoose.model('Poem', PoemSchema)
+module.exports = mongoose.model('Poem', PoemSchema);

@@ -5,6 +5,10 @@
     "mocha": true,
     "es2022": true
   },
+	"parserOptions": {
+		// Required for certain syntax usages
+		"ecmaVersion": 2022
+	},
   "plugins": ["chai-friendly"],
   "rules": {
 		"indent": [2, "tab"],

@@ -1,0 +1,16 @@
+name: ESlint
+on: [push]
+jobs:
+  eslint:
+    name: Lint JavaScript files
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkoutev2
+
+      - name: Install packages
+        run: npm i
+      - name: Run ESlint
+        run: npm run lint
+    

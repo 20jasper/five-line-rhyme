@@ -1,5 +1,5 @@
 name: ESlint
-on: [push]
+on: [push, pull_request]
 jobs:
   eslint:
     name: Lint JavaScript files

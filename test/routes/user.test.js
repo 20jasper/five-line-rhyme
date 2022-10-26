@@ -5,7 +5,10 @@ const { mongoMemoryServerConnect, getCSRFToken } = require('../../helpers/testHe
 (() => {
 	before(mongoMemoryServerConnect);
 	let _csrf;
-	const request = session(app);
+	let request;
+	beforeEach(() => {
+		request = session(app);
+	});
 
 	describe('GET /login', () => {
 		it('should return 200 OK', (done) => {

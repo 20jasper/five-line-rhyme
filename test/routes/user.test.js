@@ -1,13 +1,15 @@
-const request = require('supertest');
+const session = require('supertest-session');
 const app = require('../../app');
-const { mongoMemoryServerConnect } = require('../../helpers/testHelpers..test');
+const { mongoMemoryServerConnect, getCSRFToken } = require('../../helpers/testHelpers.test');
 
 (() => {
 	before(mongoMemoryServerConnect);
+	let _csrf;
+	const request = session(app);
 
 	describe('GET /login', () => {
 		it('should return 200 OK', (done) => {
-			request(app)
+			request
 				.get('/login')
 				.expect(200, done);
 		});
@@ -15,15 +17,36 @@ const { mongoMemoryServerConnect } = require('../../helpers/testHelpers..test');
 
 	describe('GET /signup', () => {
 		it('should return 200 OK', (done) => {
-			request(app)
+			request
 				.get('/signup')
 				.expect(200, done);
 		});
 	});
 
+	describe('Post /signup with missing csrf token', () => {
+		it('should return 500 Internal Server Error', async (done) => {
+			const res = await request.get('/signup');
+			_csrf = getCSRFToken(res);
+
+			request
+				.post('/signup')
+				.send({ _csrf })
+				.expect(500, done);
+		});
+	});
+
+	describe('Post /signup with missing csrf token', () => {
+		it('should return 500 Internal Server Error', (done) => {
+			request
+				.post('/signup')
+				.send({ })
+				.expect(500, done);
+		});
+	});
+
 	describe('GET /account', () => {
 		it('should return 302 Redirect', (done) => {
-			request(app)
+			request
 				.get('/account')
 				.expect(302, done);
 		});

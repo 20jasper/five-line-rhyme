@@ -1,6 +1,8 @@
 const session = require('supertest-session');
 const app = require('../../app');
-const { mongoMemoryServerConnect, getCSRFToken, testAccount } = require('../../helpers/testHelpers.test');
+const {
+	mongoMemoryServerConnect, signup
+} = require('../../helpers/testHelpers.test');
 
 /*
 	Test routes while logged out
@@ -56,24 +58,11 @@ const { mongoMemoryServerConnect, getCSRFToken, testAccount } = require('../../h
 	console.log('logged in routes');
 	mongoMemoryServerConnect();
 
-	let _csrf;
 	let request;
 
 	beforeEach(async () => {
 		request = session(app);
-
-		const res = await request.get('/signup');
-		_csrf = getCSRFToken(res);
-
-		// signup with new account
-		request
-			.post('/signup')
-			.send({
-				_csrf,
-				...testAccount
-			});
-
-		_csrf = null;
+		signup(request);
 	});
 
 	describe('GET /account while logged in', () => {

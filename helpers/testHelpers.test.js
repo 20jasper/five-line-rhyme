@@ -19,3 +19,16 @@ exports.testAccount = {
 	password: '12345678',
 	confirmPassword: '12345678'
 };
+
+exports.signup = async (request) => {
+	const res = await request.get('/signup');
+	const _csrf = this.getCSRFToken(res);
+
+	// signup with new account
+	request
+		.post('/signup')
+		.send({
+			_csrf,
+			...this.testAccount
+		});
+};

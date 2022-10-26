@@ -39,6 +39,7 @@ Users can look at poems shared by others or create an account to post their own.
 	- populate posts with user information
 	- use multer to handle file uploads
 	- use cloudinary to crop, store, and destroy images
+	- Use GitHub actions to check formatting on each push
 I ran into some issues with the hosted version working differently than my local version, so now I make sure to check if my data exists before accessing it.
 
 ## Installation

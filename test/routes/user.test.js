@@ -83,4 +83,12 @@ const { mongoMemoryServerConnect, getCSRFToken, testAccount } = require('../../h
 				.expect(200);
 		});
 	});
+
+	describe('GET /logout while logged in', () => {
+		it('should return 302 Found', async () => {
+			request
+				.get('/logout')
+				.expect(302);
+		});
+	});
 })();

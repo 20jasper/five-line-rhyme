@@ -12,4 +12,12 @@ const { mongoMemoryServerConnect } = require('../../helpers/testHelpers.test');
 				.expect(200, done);
 		});
 	});
+
+	describe('GET /randomURL', () => {
+		it('should return  404 "Not Found"', (done) => {
+			request
+				.get('/randomURL')
+				.expect(404, done);
+		});
+	});
 })();

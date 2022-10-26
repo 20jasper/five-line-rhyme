@@ -2,7 +2,7 @@ const passport = require('passport');
 const validator = require('validator');
 const User = require('../models/User');
 const Poem = require('../models/Poem');
-const cloudinary = require("../middleware/cloudinary")
+const cloudinary = require('../middleware/cloudinary');
 
 /**
  * GET /login
@@ -93,17 +93,17 @@ exports.postSignup = (req, res, next) => {
 		password: req.body.password,
 		userName: req.body.userName,
 		profile: {
-			pronouns: "",
-			location: "",
-			website: "",
+			pronouns: '',
+			location: '',
+			website: '',
 			picture: {
-				url: "",
-				cloudinaryId: "",
+				url: '',
+				cloudinaryId: '',
 			}
 		}
 	});
 
-	//ensure unique user name
+	// ensure unique user name
 	User.findOne({ userName: req.body.userName }, (err, existingUser) => {
 		if (err) { return next(err); }
 		if (existingUser) {
@@ -112,7 +112,7 @@ exports.postSignup = (req, res, next) => {
 		}
 	});
 
-	//ensure unique email
+	// ensure unique email
 	User.findOne({ email: req.body.email }, (err, existingUser) => {
 		if (err) { return next(err); }
 		if (existingUser) {
@@ -209,14 +209,14 @@ exports.postUpdatePassword = (req, res, next) => {
 exports.postUpdateProfilePicture = async (req, res, next) => {
 	try {
 		// Upload image to cloudinary
-		const result = await cloudinary.uploader.upload(req.file.path, { aspect_ratio: "1.0", height: 200, crop: "lfill" });
+		const result = await cloudinary.uploader.upload(req.file.path, { aspect_ratio: '1.0', height: 200, crop: 'lfill' });
 
 		User.findById(req.user.id, (err, user) => {
 			if (err) { return next(err); }
-			const picture = user.profile.picture
+			const { picture } = user.profile;
 
-			//if there is already a profile picture, delete the old one
-			if (picture.cloudinaryId !== "") cloudinary.uploader.destroy(picture.cloudinaryId)
+			// if there is already a profile picture, delete the old one
+			if (picture.cloudinaryId !== '') cloudinary.uploader.destroy(picture.cloudinaryId);
 
 			picture.url = result.secure_url;
 			picture.cloudinaryId = result.public_id;
@@ -239,21 +239,20 @@ exports.postUpdateProfilePicture = async (req, res, next) => {
  * Delete user account.
  */
 exports.postDeleteAccount = (req, res, next) => {
-	//delete profile picture on account deletion
+	// delete profile picture on account deletion
 	try {
 		User.findById(req.user.id, (err, user) => {
 			if (err) { return next(err); }
-			const picture = user.profile.picture
+			const { picture } = user.profile;
 
-			//if there is a profile picture, delete the old one
-			if (picture.cloudinaryId !== "") cloudinary.uploader.destroy(picture.cloudinaryId)
+			// if there is a profile picture, delete the old one
+			if (picture.cloudinaryId !== '') cloudinary.uploader.destroy(picture.cloudinaryId);
 		});
 
 		Poem.deleteMany({ user: req.user.id }, (err) => {
 			if (err) { return next(err); }
 		});
-	}
-	catch (err) {
+	} catch (err) {
 		console.log(err);
 		req.flash('errors', { msg: 'Profile Picture Deletion Failed' });
 		res.redirect('/account');

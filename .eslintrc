@@ -3,10 +3,16 @@
   "env": {
     "node": true,
     "mocha": true,
-    "es6": true
+    "es2022": true
   },
+	"parserOptions": {
+		// Required for certain syntax usages
+		"ecmaVersion": 2022
+	},
   "plugins": ["chai-friendly"],
   "rules": {
+		"indent": [2, "tab"],
+		"no-tabs": 0,
     "comma-dangle": 0,
     "consistent-return": 0,
     "function-paren-newline": ["error", "never"],

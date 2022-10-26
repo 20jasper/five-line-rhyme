@@ -23,6 +23,15 @@ const { mongoMemoryServerConnect, getCSRFToken } = require('../../helpers/testHe
 		});
 	});
 
+	describe('Post /signup with missing csrf token', () => {
+		it('should return 500 Internal Server Error', (done) => {
+			request
+				.post('/signup')
+				.send({ })
+				.expect(500, done);
+		});
+	});
+
 	describe('Post /signup with only csrf token', () => {
 		it('should return 500 Internal Server Error', async () => {
 			const res = await request.get('/signup');
@@ -32,15 +41,6 @@ const { mongoMemoryServerConnect, getCSRFToken } = require('../../helpers/testHe
 				.post('/signup')
 				.send({ _csrf })
 				.expect(500);
-		});
-	});
-
-	describe('Post /signup with missing csrf token', () => {
-		it('should return 500 Internal Server Error', (done) => {
-			request
-				.post('/signup')
-				.send({ })
-				.expect(500, done);
 		});
 	});
 

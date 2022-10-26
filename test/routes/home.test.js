@@ -1,6 +1,6 @@
 const request = require('supertest');
 const app = require('../../app');
-const { mongoMemoryServerConnect } = require('../../helpers/testHelpers..test');
+const { mongoMemoryServerConnect } = require('../../helpers/testHelpers.test');
 
 (() => {
 	before(mongoMemoryServerConnect);

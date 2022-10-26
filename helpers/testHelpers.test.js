@@ -12,3 +12,10 @@ exports.getCSRFToken = (res) => {
 	return $('meta[name="csrf-token"]')
 		.attr('content');
 };
+
+exports.testAccount = {
+	email: 'test@test.com',
+	userName: 'test',
+	password: '12345678',
+	confirmPassword: '12345678'
+};

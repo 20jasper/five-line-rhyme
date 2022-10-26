@@ -1,13 +1,17 @@
-const request = require('supertest');
+const session = require('supertest-session');
 const app = require('../../app');
 const { mongoMemoryServerConnect } = require('../../helpers/testHelpers.test');
 
 (() => {
 	before(mongoMemoryServerConnect);
+	let request;
+	beforeEach(() => {
+		request = session(app);
+	});
 
 	describe('GET /', () => {
 		it('should return 200 OK', (done) => {
-			request(app)
+			request
 				.get('/')
 				.expect(200, done);
 		});

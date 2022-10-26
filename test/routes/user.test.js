@@ -4,12 +4,13 @@ const {
 	mongoMemoryServerConnect, signup
 } = require('../../helpers/testHelpers.test');
 
+mongoMemoryServerConnect();
+
 /*
 	Test routes while logged out
 */
 (() => {
 	console.log('logged out routes');
-	mongoMemoryServerConnect();
 
 	let request;
 
@@ -56,7 +57,6 @@ const {
 */
 (() => {
 	console.log('logged in routes');
-	mongoMemoryServerConnect();
 
 	let request;
 

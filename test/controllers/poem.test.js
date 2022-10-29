@@ -6,7 +6,7 @@ describe('Post poem', () => {
 		let poem = 'here is a dangerous poem with spooky characters like &, <, and >';
 		poem = sanitizeHTML(poem);
 
-		expect(poem).to.equal('here is a dangerous poem with spooky characters like &amp;, &lt;, and &gt');
+		expect(poem).to.equal('here is a dangerous poem with spooky characters like &amp;, &lt;, and &gt;');
 		done();
 	});
 });

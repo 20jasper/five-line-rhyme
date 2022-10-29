@@ -4,6 +4,7 @@ const sinon = require('sinon');
 chai.use(require('sinon-chai'));
 const { sanitizeHTML, getLineCount } = require('../../helpers/poemHelpers');
 const { postPoem } = require('../../controllers/poem');
+const Poem = require('../../models/Poem');
 
 describe('Post poem helper functions', () => {
 	it('Should correctly count lines', async () => {
@@ -69,5 +70,20 @@ describe('Post poem function', () => {
 
 		expect(req.flash).to.have.been.calledWith('errors', [{ msg: 'Your Poem Is Longer than 500 characters' }, { msg: 'Your Poem Has Less Than 5 Lines' }]);
 		expect(res.redirect).to.have.been.calledWith('/poems/add');
+	});
+
+	it('Should post trimmed and escaped poem', async () => {
+		req.body.content = 'a&<>\r\n'.repeat(5);
+		Poem.create = sinon.stub().returns(Poem);
+
+		await postPoem(req, res);
+
+		expect(Poem.create).to.have.been.calledWith({
+			title: 'poem',
+			content: `${'a&amp;&lt;&gt;\r\n'.repeat(4)}a&amp;&lt;&gt;`,
+			user: '2983928398'
+		});
+		expect(req.flash).to.not.have.been.called;
+		expect(res.redirect).to.have.been.calledWith('/');
 	});
 });

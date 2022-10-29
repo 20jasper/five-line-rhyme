@@ -52,7 +52,6 @@ exports.postPoem = async (req, res, next) => {
  * Delete poem.
  */
 exports.postDeletePoem = (req, res, next) => {
-	// //delete profile picture on account deletion
 	try {
 		const validationErrors = [];
 

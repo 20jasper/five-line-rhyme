@@ -43,7 +43,7 @@ exports.postPoem = async (req, res, next) => {
 		res.redirect('/');
 	} catch (err) {
 		console.error(err);
-		res.render('error/500');
+		res.status(500).render('error/500');
 	}
 };
 

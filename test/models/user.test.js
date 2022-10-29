@@ -41,7 +41,35 @@ describe('User Model', () => {
 	});
 
 	it('should not create a user with the unique email', (done) => {
-		const UserMock = sinon.mock(User(testAccount));
+		const UserMock = sinon.mock(User({
+			...testAccount,
+			userName: 'different user name'
+		}));
+		const user = UserMock.object;
+		const expectedError = {
+			name: 'MongoError',
+			code: 11000
+		};
+
+		UserMock
+			.expects('save')
+			.yields(expectedError);
+
+		user.save((err, result) => {
+			UserMock.verify();
+			UserMock.restore();
+			expect(err.name).to.equal('MongoError');
+			expect(err.code).to.equal(11000);
+			expect(result).to.be.undefined;
+			done();
+		});
+	});
+
+	it('should not create a user with the unique user name', (done) => {
+		const UserMock = sinon.mock(User({
+			...testAccount,
+			email: 'differentemail@gmail.com'
+		}));
 		const user = UserMock.object;
 		const expectedError = {
 			name: 'MongoError',

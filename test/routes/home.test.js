@@ -2,8 +2,9 @@ const session = require('supertest-session');
 const app = require('../../app');
 const { mongoMemoryServerConnect } = require('../../helpers/testHelpers.test');
 
+mongoMemoryServerConnect();
+
 (() => {
-	before(mongoMemoryServerConnect);
 	let request;
 	beforeEach(() => {
 		request = session(app);

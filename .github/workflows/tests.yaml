@@ -12,8 +12,8 @@ jobs:
         with:
           node-version: 16
         env:
-          ${{ secrets.MONGODB_URI }}
-          
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+
       - name: Install packages
         run: npm ci
       - name: Run Tests

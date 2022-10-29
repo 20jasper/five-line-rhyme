@@ -90,6 +90,11 @@ exports.getPoem = async (req, res) => {
 		const poem = await Poem.findById(req.params.id)
 			.populate('user');
 
+		// if no poem is found to be rendered
+		if (poem === null) {
+			throw Error('Poem not found');
+		}
+
 		res.render('poems/poem', {
 			poem,
 		});

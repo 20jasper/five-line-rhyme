@@ -1,5 +1,7 @@
 name: Unit tests
 on: [push, pull_request]
+env:
+  MONGODB_URI: ${{ secrets.MONGODB_URI }}
 jobs:
   eslint:
     name: Unit tests
@@ -11,8 +13,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16
-        env:
-          MONGODB_URI: ${{ secrets.MONGODB_URI }}
 
       - name: Install packages
         run: npm ci

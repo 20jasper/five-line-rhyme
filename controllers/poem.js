@@ -57,9 +57,12 @@ exports.postDeletePoem = (req, res, next) => {
 
 		// check if user is the same as who wrote the poem
 		Poem.findById(req.params.id, (err, poem) => {
-			if (err) { return next(err); }
-			console.log(poem.user.id, req.user.id);
-			if (poem.user.id !== req.user.id) validationErrors.push({ msg: 'User IDs do not match' });
+			if (err) {
+				return next(err);
+			}
+			if (poem.user.id !== req.user.id) {
+				validationErrors.push({ msg: 'User IDs do not match' });
+			}
 		});
 
 		if (validationErrors.length) {

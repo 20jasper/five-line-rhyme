@@ -61,4 +61,13 @@ describe('Post poem function', () => {
 		expect(req.flash).to.have.been.calledWith('errors', [{ msg: 'Your Poem Has More Than 5 Lines' }]);
 		expect(res.redirect).to.have.been.calledWith('/poems/add');
 	});
+
+	it('Should respond with "Your Poem Is Longer than 500 characters" and "Your Poem Has Less Than 5 Lines"', async () => {
+		req.body.content = 'a'.repeat(501);
+
+		await postPoem(req, res);
+
+		expect(req.flash).to.have.been.calledWith('errors', [{ msg: 'Your Poem Is Longer than 500 characters' }, { msg: 'Your Poem Has Less Than 5 Lines' }]);
+		expect(res.redirect).to.have.been.calledWith('/poems/add');
+	});
 });

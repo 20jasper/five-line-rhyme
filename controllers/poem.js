@@ -18,8 +18,6 @@ exports.getAddPage = (req, res) => {
 // add story post request
 exports.postPoem = async (req, res, next) => {
 	try {
-		req.body.user = req.user.id;
-
 		const validationErrors = [];
 		const poem = req.body.content.trim();
 
@@ -37,9 +35,11 @@ exports.postPoem = async (req, res, next) => {
 			return res.redirect('/poems/add');
 		}
 
-		req.body.content = sanitizeHTML(req.body.content);
-
-		await Poem.create(req.body);
+		await Poem.create({
+			title: req.body.title,
+			content: sanitizeHTML(poem),
+			user: req.user.id,
+		});
 		res.redirect('/');
 	} catch (err) {
 		console.error(err);

@@ -32,3 +32,9 @@ exports.signup = async (request) => {
 			...this.testAccount
 		});
 };
+
+exports.testPoem = {
+	title: 'Cool poem',
+	content: '1\r\n2\r\n3\r\n4\r\n5',
+	user: '6321b82c985cb15bd091101g'
+};

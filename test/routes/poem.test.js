@@ -25,6 +25,14 @@ mongoMemoryServerConnect();
 				.expect(302, done);
 		});
 	});
+
+	describe('GET /poems/randomPoemID', () => {
+		it('should return 404 not Found', (done) => {
+			request
+				.get('/poems/randomPoemID')
+				.expect(404, done);
+		});
+	});
 })();
 
 /*

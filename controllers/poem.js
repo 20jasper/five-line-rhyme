@@ -94,6 +94,6 @@ exports.getPoem = async (req, res) => {
 			poem,
 		});
 	} catch (err) {
-		console.log(err);
+		res.status(404).render('error/404');
 	}
 };

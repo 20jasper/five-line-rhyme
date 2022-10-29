@@ -1,3 +1,4 @@
+// replace &, <, and > with appropriate HTML entity
 exports.sanitizeHTML = (string) => {
 	const entityHashMap = {
 		'&': '&amp;',

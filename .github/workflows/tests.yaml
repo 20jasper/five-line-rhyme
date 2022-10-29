@@ -1,4 +1,4 @@
-name: ESlint
+name: Unit tests
 on: [push, pull_request]
 jobs:
   eslint:

@@ -1,4 +1,5 @@
 const Poem = require('../models/Poem');
+const { sanitizeHTML } = require('../helpers/poemHelpers');
 
 /**
  * GET /poems/add
@@ -34,13 +35,7 @@ exports.postPoem = async (req, res, next) => {
 			return res.redirect('/poems/add');
 		}
 
-		// sanatize poems
-		const entityHashMap = {
-			'&': '&amp;',
-			'<': '&lt;',
-			'>': '&gt;',
-		};
-		req.body.content = req.body.content.replace(/&|<|>/g, (str) => entityHashMap[str]);
+		req.body.content = sanitizeHTML(req.body.content);
 
 		await Poem.create(req.body);
 		res.redirect('/');

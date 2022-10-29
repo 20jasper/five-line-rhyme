@@ -2,6 +2,7 @@ name: Unit tests
 on: [push, pull_request]
 env:
   MONGODB_URI: ${{ secrets.MONGODB_URI }}
+  SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
 jobs:
   eslint:
     name: Unit tests

@@ -13,3 +13,5 @@ exports.getLineCount = (string) => {
 	const newLineCount = string.split(/\r/g).length;
 	return newLineCount;
 };
+
+exports.getPoemXLinesLong = (repetitions, string = 'a') => `${string}\r\n`.repeat(repetitions).trim();

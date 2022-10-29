@@ -2,21 +2,16 @@ const { expect } = require('chai');
 const chai = require('chai');
 const sinon = require('sinon');
 chai.use(require('sinon-chai'));
-const { sanitizeHTML, getLineCount } = require('../../helpers/poemHelpers');
+
+const { sanitizeHTML, getLineCount, getPoemXLinesLong } = require('../../helpers/poemHelpers');
 const { postPoem } = require('../../controllers/poem');
 const Poem = require('../../models/Poem');
 
 describe('Post poem helper functions', () => {
 	it('Should correctly count lines', async () => {
-		const emptyPoem = '';
-		const oneLinePoem = 'one line';
-		const fiveLinePoem = '1\r\n2\r\n3\r\n4\r\n5';
-		const sixLinePoem = '1\r\n2\r\n3\r\n4\r\n5\r\n6';
-
-		expect(getLineCount(emptyPoem)).to.equal(1);
-		expect(getLineCount(oneLinePoem)).to.equal(1);
-		expect(getLineCount(fiveLinePoem)).to.equal(5);
-		expect(getLineCount(sixLinePoem)).to.equal(6);
+		for (let i = 1; i < 9; i++) {
+			expect(getLineCount(getPoemXLinesLong(i))).to.equal(i);
+		}
 	});
 
 	it('Should replace "&," "<," and ">" with HTML entities', (done) => {
@@ -46,9 +41,12 @@ describe('Post poem function', () => {
 		res.status = sinon.stub().returns(res);
 		res.render = sinon.stub().returns(res);
 		res.redirect = sinon.stub().returns(res);
+
+		Poem.create = sinon.stub().returns(Poem);
 	});
 
 	it('Should respond with "Your Poem Has Less Than 5 Lines"', async () => {
+		req.body.content = getPoemXLinesLong(4);
 		await postPoem(req, res);
 
 		expect(req.flash).to.have.been.calledWith('errors', [{ msg: 'Your Poem Has Less Than 5 Lines' }]);
@@ -56,7 +54,7 @@ describe('Post poem function', () => {
 	});
 
 	it('Should respond with "Your Poem Has More Than 5 Lines"', async () => {
-		req.body.content = '1\r\n2\r\n3\r\n4\r\n5\r\n6';
+		req.body.content = getPoemXLinesLong(6);
 		await postPoem(req, res);
 
 		expect(req.flash).to.have.been.calledWith('errors', [{ msg: 'Your Poem Has More Than 5 Lines' }]);
@@ -74,7 +72,6 @@ describe('Post poem function', () => {
 
 	it('Should post trimmed and escaped poem', async () => {
 		req.body.content = 'a&<>\r\n'.repeat(5);
-		Poem.create = sinon.stub().returns(Poem);
 
 		await postPoem(req, res);
 

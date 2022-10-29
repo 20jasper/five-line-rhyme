@@ -53,22 +53,16 @@ exports.postPoem = async (req, res, next) => {
  */
 exports.postDeletePoem = (req, res, next) => {
 	try {
-		const validationErrors = [];
-
 		// check if user is the same as who wrote the poem
 		Poem.findById(req.params.id, (err, poem) => {
 			if (err) {
 				return next(err);
 			}
 			if (poem.user.id !== req.user.id) {
-				validationErrors.push({ msg: 'User IDs do not match' });
+				req.flash('errors', { msg: 'User IDs do not match' });
+				return res.redirect(`poems/${req.params.id}`);
 			}
 		});
-
-		if (validationErrors.length) {
-			req.flash('errors', validationErrors);
-			return res.redirect(`poems/${req.params.id}`);
-		}
 
 		Poem.deleteOne({ _id: req.params.id }, (err) => {
 			if (err) { return next(err); }

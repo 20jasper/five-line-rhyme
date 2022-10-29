@@ -15,7 +15,7 @@
     "postinstall": "npm rebuild node-sass",
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "test": "nyc mocha \"test/**/*.test.js\" --timeout=10000 --exit",
+    "test": "nyc mocha \"test/controllers/*.test.js\" --timeout=10000 --exit",
     "lint": "eslint \"**/*.js\""
   },
   "dependencies": {
@@ -45,6 +45,7 @@
     "passport-oauth2-refresh": "^2.1.0",
     "popper.js": "^1.16.1",
     "pug": "^3.0.2",
+    "sinon-chai": "^3.7.0",
     "supertest-session": "^4.1.0",
     "validator": "^13.7.0"
   },

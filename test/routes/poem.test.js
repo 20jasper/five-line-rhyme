@@ -47,4 +47,12 @@ mongoMemoryServerConnect();
 		request = session(app);
 		signup(request);
 	});
+
+	describe('GET /poems/add', () => {
+		it('should return 200 OK', async () => {
+			request
+				.get('/poems/add')
+				.expect(200);
+		});
+	});
 })();

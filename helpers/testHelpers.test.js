@@ -7,6 +7,7 @@ exports.mongoMemoryServerConnect = async () => {
 	process.env.MONGODB_URI = mockMongoDBUri;
 };
 
+// extract CSRF token from meta tag in HTML
 exports.getCSRFToken = (res) => {
 	const $ = cheerio.load(res.text);
 	return $('meta[name="csrf-token"]')

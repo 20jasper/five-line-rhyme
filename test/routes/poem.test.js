@@ -33,6 +33,14 @@ mongoMemoryServerConnect();
 				.expect(404, done);
 		});
 	});
+
+	describe('GET an existing poem', () => {
+		it('should return 200 OK', (done) => {
+			request
+				.get('/poems/6321b96b985cb15bd091102d')
+				.expect(200, done);
+		});
+	});
 })();
 
 /*

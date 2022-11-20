@@ -46,10 +46,10 @@ Use ```npm run start``` to run the app normally and ```npm run dev``` to run the
 
 ```
 "@fortawesome/fontawesome-free": "^6.1.1",
-"@ladjs/bootstrap-social": "^7.0.2",
 "@node-rs/bcrypt": "^1.6.0",
 "body-parser": "^1.19.2",
 "bootstrap": "^5.1.3",
+"cheerio": "^1.0.0-rc.12",
 "cloudinary": "^1.31.0",
 "compression": "^1.7.4",
 "connect-mongo": "^4.6.0",
@@ -63,13 +63,13 @@ Use ```npm run start``` to run the app normally and ```npm run dev``` to run the
 "mongoose": "^6.2.8",
 "morgan": "^1.10.0",
 "multer": "^1.4.4",
-"node-sass": "^7.0.1",
-"node-sass-middleware": "^1.0.1",
 "passport": "^0.5.2",
 "passport-local": "^1.0.0",
 "passport-oauth2-refresh": "^2.1.0",
 "popper.js": "^1.16.1",
 "pug": "^3.0.2",
+"sinon-chai": "^3.7.0",
+"supertest-session": "^4.1.0",
 "validator": "^13.7.0"
 ```
 
@@ -84,6 +84,7 @@ Use ```npm run start``` to run the app normally and ```npm run dev``` to run the
 "mongodb-memory-server": "^8.4.1",
 "nodemon": "^2.0.19",
 "nyc": "^15.1.0",
+"sass": "^1.56.1",
 "sinon": "^13.0.1",
 "supertest": "^6.2.2"
 ```

@@ -12,7 +12,7 @@
     "Jacob Asper (https://github.com/20jasper)"
   ],
   "scripts": {
-    "postinstall": "npm rebuild node-sass",
+    "sass": "sass --watch --update --style=expanded public/css:public/css",
     "start": "node app.js",
     "dev": "nodemon app.js",
     "test": "nyc mocha \"test/**/*.test.js\" --timeout=10000 --exit",
@@ -38,8 +38,6 @@
     "mongoose": "^6.2.8",
     "morgan": "^1.10.0",
     "multer": "^1.4.4",
-    "node-sass": "^7.0.1",
-    "node-sass-middleware": "^1.0.1",
     "passport": "^0.5.2",
     "passport-local": "^1.0.0",
     "passport-oauth2-refresh": "^2.1.0",
@@ -59,6 +57,7 @@
     "mongodb-memory-server": "^8.4.1",
     "nodemon": "^2.0.19",
     "nyc": "^15.1.0",
+    "sass": "^1.56.1",
     "sinon": "^13.0.1",
     "supertest": "^6.2.2"
   },
